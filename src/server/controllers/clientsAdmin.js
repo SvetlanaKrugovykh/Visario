@@ -1,9 +1,10 @@
 require('dotenv').config()
 const { inputLineScene, inputLineAdminScene } = require('../controllers/inputLine')
-const { clientAdminStarterButtons } = require('../modules/keyboard')
+const { buttonsConfig } = require('../modules/keyboard')
 const GROUP_ID = Number(process.env.GROUP_ID)
 const { saveLanguage } = require('../modules/common_functions')
 const { globalBuffer, selectedByUser } = require('../globalBuffer')
+const { handler } = require('../controllers/switcher')
 
 
 
@@ -27,25 +28,23 @@ async function actionsOnId(bot, msg, inputLine) {
 
 module.exports.clientsAdmin = async function (bot, msg) {
 
-  await module.exports.clientAdminMenuStarter(bot, msg, clientAdminStarterButtons)
+  await module.exports.clientAdminMenuStarter(bot, msg)
 
 }
 
-//#region clientAdminMenus
-module.exports.clientAdminMenuStarter = async function (bot, msg, clientAdminStarterButtons) {
+module.exports.clientAdminMenuStarter = async function (bot, msg) {
+  const lang = 'en' //selectedByUser[msg.chat.id]?.language || 'en' //TODO: check if it is needed
   const selected_ = await saveLanguage(msg, 'AdminMenuStarter', selectedByUser[msg.chat.id])
   console.log('selected_', selected_)
-  await bot.sendMessage(msg.chat.id, clientAdminStarterButtons.title, {
+  await bot.sendMessage(msg.chat.id, buttonsConfig["clientAdminStarterButtons"].title[lang], {
     reply_markup: {
-      keyboard: clientAdminStarterButtons.buttons,
+      keyboard: buttonsConfig["clientAdminStarterButtons"].buttons[lang],
       resize_keyboard: true
     }
   })
-
   console.log(((new Date()).toLocaleTimeString()))
 }
 
-//#endregion
 
 //#region clientAdminSubMenus
 module.exports.clientsAdminResponseToRequest = async function (bot, msg) {

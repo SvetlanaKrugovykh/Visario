@@ -60,8 +60,8 @@ module.exports.saveTg_user = async function (id, username, first_name, last_name
 
 module.exports.addQuestionAnswer = async function (language, question, answer) {
   try {
-    const query = 'INSERT INTO questions_answers (language, question, answer) VALUES ($1, $2, $3)'
-    await client.query(query, [language, question, answer])
+    const query = `INSERT INTO ${language} (question, answer) VALUES ($1, $2)`
+    await client.query(query, [question, answer])
     console.log(`The pair "question-answer" is added for the language ${language}`)
   } catch (error) {
     console.error('Error when adding a question and answer:', error)
@@ -70,8 +70,8 @@ module.exports.addQuestionAnswer = async function (language, question, answer) {
 
 module.exports.getQuestionAnswer = async function (language, question) {
   try {
-    const query = 'SELECT answer FROM questions_answers WHERE language = $1 AND question = $2'
-    const res = await client.query(query, [language, question])
+    const query = `SELECT answer FROM ${language} WHERE question = $1`
+    const res = await client.query(query, [question])
     return res.rows.length > 0 ? res.rows[0].answer : null
   } catch (error) {
     console.error('Error when getting an answer:', error)
@@ -80,8 +80,8 @@ module.exports.getQuestionAnswer = async function (language, question) {
 
 module.exports.deleteQuestionAnswer = async function (language, question) {
   try {
-    const query = 'DELETE FROM questions_answers WHERE language = $1 AND question = $2'
-    await client.query(query, [language, question])
+    const query = `DELETE FROM ${language} WHERE question = $1`
+    await client.query(query, [question])
     console.log(`The pair "question-answer" is deleted for the language ${language}`)
   } catch (error) {
     console.error('Error when deleting a question and answer:', error)
@@ -93,12 +93,11 @@ module.exports.findSimilarQuestion = async function (language, queryText) {
   try {
     const query = `
             SELECT question, answer
-            FROM questions_answers
-            WHERE language = $1
-            ORDER BY similarity(question, $2) DESC
+            FROM ${language}
+            ORDER BY similarity(question, $1) DESC
             LIMIT 1
         `
-    const res = await client.query(query, [language, queryText])
+    const res = await client.query(query, [queryText])
     return res.rows.length > 0 ? res.rows[0] : null
   } catch (error) {
     console.error('Error when searching for a similar question:', error)

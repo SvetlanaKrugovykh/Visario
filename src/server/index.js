@@ -16,6 +16,7 @@ bot.on('message', async (msg) => {
 
   if (text === '/start' || (globalBuffer[chatId] === undefined)) {
     await commonStartMenu(bot, msg, true)
+    await handler(bot, msg, undefined)
   } else {
     await handler(bot, msg, undefined)
   }

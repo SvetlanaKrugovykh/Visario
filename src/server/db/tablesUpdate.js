@@ -42,13 +42,13 @@ const tableQueries = {
   'en': `
     CREATE TABLE en (
       id SERIAL PRIMARY KEY,
-      language VARCHAR(2) NOT NULL, 
+      question TEXT NOT NULL,
       answer TEXT NOT NULL
     )`,
   'ru': `
     CREATE TABLE ru (
       id SERIAL PRIMARY KEY,
-      language VARCHAR(2) NOT NULL, 
+      question TEXT NOT NULL,
       answer TEXT NOT NULL
     )`,
 }

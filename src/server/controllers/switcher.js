@@ -81,7 +81,7 @@ async function handler(bot, msg, webAppUrl) {
       await menu.ChooseTime(bot, msg, lang)
       break
     case '3_21':
-      const similarQuestion = await tgToDB.findSimilarQuestion('en', 'What is the process to get a Thai visa?')
+      const similarQuestion = await tgToDB.findSimilarQuestion('en', 'What is the process to get a Thai visa?')  //TODO: add variable for QA
       console.log('Найдено:', similarQuestion)
       break
     case '3_22':

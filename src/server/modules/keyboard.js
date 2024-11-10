@@ -90,17 +90,31 @@ const buttonsConfig = {
     },
   },
   clientAdminStarterButtons: {
-    title: 'Choose a starter admin action',
+    title: {
+      en: 'Please select an action',
+      ru: 'Оберіть, будь ласка, дію'
+    },
     options: [{ resize_keyboard: true }],
-    buttons: [
-      [{ text: '🟣 Input the question', callback_data: '5_1' }],
-      [{ text: '🔵 Input the answer', callback_data: '5_2' }],
-      [{ text: 'Get the pair question-answer from the DB', callback_data: '3_21' }],
-      [{ text: '📌 Add the pair question-answer to the DB', callback_data: '3_22' }],
-      [{ text: 'Delete the pair question-answer to the DB', callback_data: '3_23' }],
-      [{ text: 'Send reply to the client request', callback_data: '3_2' }],
-      [{ text: 'Return', callback_data: '3_3' }]
-    ]
+    buttons: {
+      en: [
+        [{ text: '🟣 Input the question', callback_data: '5_1' }],
+        [{ text: '🔵 Input the answer', callback_data: '5_2' }],
+        [{ text: 'Get the pair question-answer from the DB', callback_data: '3_21' }],
+        [{ text: '📌 Add the pair question-answer to the DB', callback_data: '3_22' }],
+        [{ text: 'Delete the pair question-answer to the DB', callback_data: '3_23' }],
+        [{ text: 'Send reply to the client request', callback_data: '3_2' }],
+        [{ text: 'Return', callback_data: '3_3' }]
+      ],
+      ru: [
+        [{ text: '🟣 Введіть питання', callback_data: '5_1' }],
+        [{ text: '🔵 Введіть відповідь', callback_data: '5_2' }],
+        [{ text: 'Отримати пару питання-відповідь з БД', callback_data: '3_21' }],
+        [{ text: '📌 Додати пару питання-відповідь в БД', callback_data: '3_22' }],
+        [{ text: 'Видалити пару питання-відповідь з БД', callback_data: '3_23' }],
+        [{ text: 'Відправити відповідь на запит клієнта', callback_data: '3_2' }],
+        [{ text: 'Повернутися', callback_data: '3_3' }]
+      ]
+    }
   }
 }
 
