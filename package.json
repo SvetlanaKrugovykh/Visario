@@ -1,0 +1,36 @@
+{
+	"name": "Kartuli-Puri",
+	"version": "1.0.0",
+	"description": "Kartuli Puri",
+	"main": "index.js",
+	"directories": {
+		"doc": "doc"
+	},
+	"scripts": {
+		"start": "nodemon src/server/server.js"
+	},
+	"author": "Svitlana Krugovykh",
+	"license": "MIT",
+	"dependencies": {
+		"@fastify/cors": "^8.4.0",
+		"@fastify/static": "^6.11.2",
+		"axios": "^1.5.1",
+		"body-parser": "^1.20.2",
+		"cors": "^2.8.5",
+		"dayjs": "^1.11.10",
+		"dotenv": "^16.3.1",
+		"fastify": "^4.20.0",
+		"fastify-plugin": "^4.5.1",
+		"geolib": "^3.3.4",
+		"http-errors": "^2.0.0",
+		"https": "^1.0.0",
+		"ip-range-check": "^0.2.0",
+		"moment": "^2.30.1",
+		"node-telegram-bot-api": "^0.61.0",
+		"node-telegram-keyboard-wrapper": "^3.1.0",
+		"nodemailer": "^6.7.7",
+		"path": "^0.12.7",
+		"pg": "^8.12.0",
+		"util": "^0.12.5"
+	}
+}
