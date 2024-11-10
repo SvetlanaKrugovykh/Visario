@@ -1,7 +1,7 @@
 const { buttonsConfig } = require('../modules/keyboard')
 const { users } = require('../users/users.model')
 const menu = require('../modules/common_menu')
-const { saveLanguage } = require('../modules/common_functions')
+const { saveLanguage, textInput } = require('../modules/common_functions')
 const { isThisGroupId } = require('../modules/bot')
 const { globalBuffer, selectedByUser } = require('../globalBuffer')
 
@@ -27,6 +27,7 @@ async function handler(bot, msg, webAppUrl) {
   const data = getCallbackData(msg.text)
   if (!chatId) return
 
+  let selected_ = null
   if (!selectedByUser[chatId]) selectedByUser[chatId] = {}
   if (!globalBuffer[chatId]) globalBuffer[chatId] = {}
   let lang = selectedByUser[chatId]?.language || 'en'
@@ -56,7 +57,7 @@ async function handler(bot, msg, webAppUrl) {
     case '0_7':
     case '0_8':
     case '0_9':
-      const selected_ = await saveLanguage(bot, msg, data, selectedByUser[chatId])
+      selected_ = await saveLanguage(bot, msg, data, selectedByUser[chatId])
       if (selected_?.language) selectedByUser[chatId].language = selected_.language
       await menu.commonStartMenu(bot, msg)
       break
@@ -77,6 +78,11 @@ async function handler(bot, msg, webAppUrl) {
       break
     case '3_4':
       await menu.ChooseTime(bot, msg, lang)
+      break
+    case '5_1':
+    case '5_2':
+      selected_ = await textInput(bot, msg, data, selectedByUser[chatId])
+      if (selected_) selectedByUser[chatId] = selected_
       break
     case '13_3':
       await bot.sendMessage(msg.chat.id, `Ok!\n`, {

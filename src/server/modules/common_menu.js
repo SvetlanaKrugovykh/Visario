@@ -1,7 +1,6 @@
 const { clientAdminMenuStarter } = require('../controllers/clientsAdmin')
 require('dotenv').config()
 const { buttonsConfig, texts } = require('./keyboard')
-const { sendReqToDB } = require('../modules/tlg_to_DB')
 const { users } = require('../users/users.model')
 const path = require('path')
 const { globalBuffer, selectedByUser } = require('../globalBuffer')
@@ -9,6 +8,7 @@ const geo = require('./geo')
 const { menuItems } = require('../data/consts')
 const { generateIntervals } = require('../services/timeService')
 const { sayTimePeriod } = require('../controllers/msgSenderMenu')
+const { saveLanguage } = require('./common_functions')
 
 
 module.exports.commonStartMenu = async function (bot, msg, home = false) {
@@ -54,12 +54,10 @@ module.exports.checkTgUser = async function (msg, lang = "en") {
   }
 
   try {
-    const response = await sendReqToDB('__CheckTlgClient__', selectedByUser[msg.chat.id], msg.chat.id)
+    const response = await saveLanguage(msg, 'checkTgUser', selectedByUser[msg.chat.id])
     console.log('CheckTlgClient:', response)
     if (response !== null) {
-      const parsedResponse = JSON.parse(response)
-      info.authorized = parsedResponse.ResponseArray?.[0]?.authorized || false
-      info.lang_ = parsedResponse.ResponseArray?.[0]?.language || 'en'
+      info.lang_ = response?.language || 'en'
     } else {
       console.log('No response from DB')
       info.lang_ = lang

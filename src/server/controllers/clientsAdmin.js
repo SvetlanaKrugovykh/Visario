@@ -2,7 +2,8 @@ require('dotenv').config()
 const { inputLineScene, inputLineAdminScene } = require('../controllers/inputLine')
 const { clientAdminStarterButtons } = require('../modules/keyboard')
 const GROUP_ID = Number(process.env.GROUP_ID)
-const { buttonsConfig } = require('../modules/keyboard')
+const { saveLanguage } = require('../modules/common_functions')
+const { globalBuffer, selectedByUser } = require('../globalBuffer')
 
 
 
@@ -32,6 +33,8 @@ module.exports.clientsAdmin = async function (bot, msg) {
 
 //#region clientAdminMenus
 module.exports.clientAdminMenuStarter = async function (bot, msg, clientAdminStarterButtons) {
+  const selected_ = await saveLanguage(msg, 'AdminMenuStarter', selectedByUser[msg.chat.id])
+  console.log('selected_', selected_)
   await bot.sendMessage(msg.chat.id, clientAdminStarterButtons.title, {
     reply_markup: {
       keyboard: clientAdminStarterButtons.buttons,

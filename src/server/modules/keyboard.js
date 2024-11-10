@@ -9,15 +9,13 @@ const buttonsConfig = {
     options: [{ resize_keyboard: true }],
     buttons: {
       en: [
-        [{ text: '📜 Download the menu', callback_data: '0_3' }],
-        [{ text: '📝 Your orders', callback_data: '0_5' }],
+        [{ text: '📝 Your ????', callback_data: '0_5' }],
         [{ text: '🇬🇧 🇷🇺 Select a language', callback_data: '0_1' }],
         [{ text: '✉︎ Ask us about anything in our business', callback_data: '0_2' }],
         [{ text: '🏠', callback_data: '0_4' }]
       ],
       ru: [
-        [{ text: '📜 Завантажити меню', callback_data: '0_3' }],
-        [{ text: '📝 Ваші замовлення', callback_data: '0_5' }],
+        [{ text: '📝 Ваші ?????', callback_data: '0_5' }],
         [{ text: '🇵🇱 🇬🇧 🇩🇪 🇺🇦 Виберіть мову', callback_data: '0_1' }],
         [{ text: '✉︎ Запитайте нас про що завгодно (в нашому бізнесі)', callback_data: '0_2' }],
         [{ text: '🏠', callback_data: '0_4' }]
@@ -95,8 +93,10 @@ const buttonsConfig = {
     title: 'Choose a starter admin action',
     options: [{ resize_keyboard: true }],
     buttons: [
+      [{ text: '🟣 Input the question', callback_data: '5_1' }],
+      [{ text: '🔵 Input the answer', callback_data: '5_2' }],
       [{ text: 'Get the pair question-answer from the DB', callback_data: '3_21' }],
-      [{ text: 'Add the pair question-answer to the DB', callback_data: '3_22' }],
+      [{ text: '📌 Add the pair question-answer to the DB', callback_data: '3_22' }],
       [{ text: 'Delete the pair question-answer to the DB', callback_data: '3_23' }],
       [{ text: 'Send reply to the client request', callback_data: '3_2' }],
       [{ text: 'Return', callback_data: '3_3' }]

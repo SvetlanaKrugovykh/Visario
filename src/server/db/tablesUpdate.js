@@ -17,17 +17,16 @@ const tableQueries = {
   'tg_users': `
     CREATE TABLE tg_users (
       id SERIAL PRIMARY KEY,
-      user_id INTEGER NOT NULL,
+      user_id BIGINT NOT NULL,
       first_name VARCHAR(255) NOT NULL,
       last_name VARCHAR(255),
       username VARCHAR(255),
-      language_code VARCHAR(2),
-      is_bot BOOLEAN NOT NULL
+      language_code VARCHAR(2)
     )`,
   'tg_msgs': `
     CREATE TABLE tg_msgs (
       id SERIAL PRIMARY KEY,
-      user_id INTEGER NOT NULL,
+      user_id BIGINT NOT NULL,
       msg_id INTEGER NOT NULL,
       msg_text TEXT NOT NULL,
       msg_date TIMESTAMP NOT NULL

@@ -13,11 +13,11 @@ const client = new Pool({
 
 client.connect()
 
-module.exports.saveLanguage = async function (language, id, chat) {
+module.exports.saveLanguage_ = async function (language, id, chat) {
   try {
-    const user = await getTg_user(id)
+    const user = await module.exports.getTg_user(id)
     if (!user) {
-      await saveTg_user(id, chat.username, chat.first_name, chat.last_name)
+      await module.exports.saveTg_user(id, chat.username, chat.first_name, chat.last_name)
     }
     const query = 'UPDATE tg_users SET language_code = $2 WHERE user_id = $1'
     await client.query(query, [id, language])
