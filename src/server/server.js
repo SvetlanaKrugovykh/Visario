@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { app, assistApiServer, interConnectApp } = require('./index')
+const { app } = require('./index')
 const HOST = process.env.HOST || '127.0.0.1'
 
 const updateTables = require('./db/tablesUpdate').updateTables
