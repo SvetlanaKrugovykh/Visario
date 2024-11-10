@@ -105,12 +105,3 @@ module.exports.findSimilarQuestion = async function (language, queryText) {
   }
 }
 
-
-// // Пример использования
-// (async () => {
-//   await addQuestionAnswer('en', 'How to apply for a Thai visa?', 'You can apply for a Thai visa online or at the nearest Thai embassy.')
-//   await addQuestionAnswer('ru', 'Как подать заявление на тайскую визу?', 'Вы можете подать заявление на тайскую визу онлайн или в ближайшем посольстве Таиланда.')
-
-//   const similarQuestion = await findSimilarQuestion('en', 'What is the process to get a Thai visa?')
-//   console.log('Найдено:', similarQuestion)
-// })()

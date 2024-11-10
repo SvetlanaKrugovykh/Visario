@@ -14,10 +14,10 @@ const { saveLanguage } = require('./common_functions')
 module.exports.commonStartMenu = async function (bot, msg, home = false) {
   console.log(`/start at ${new Date()} tg_user_id: ${msg.chat.id}`)
   const adminUser = users.find(user => user.id === msg.chat.id)
+  const lang = selectedByUser[msg.chat.id]?.language || 'en'
   if (adminUser) {
     await clientAdminMenuStarter(bot, msg, buttonsConfig["clientAdminStarterButtons"])
   } else {
-    const lang = selectedByUser[msg.chat.id]?.language || 'en'
     await module.exports.userMenu(bot, msg, lang, home)
   }
 }

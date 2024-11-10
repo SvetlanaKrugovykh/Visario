@@ -4,6 +4,7 @@ const menu = require('../modules/common_menu')
 const { saveLanguage, textInput } = require('../modules/common_functions')
 const { isThisGroupId } = require('../modules/bot')
 const { globalBuffer, selectedByUser } = require('../globalBuffer')
+const tgToDB = require('../modules/tlg_to_DB')
 
 function getCallbackData(text) {
   try {
@@ -78,6 +79,15 @@ async function handler(bot, msg, webAppUrl) {
       break
     case '3_4':
       await menu.ChooseTime(bot, msg, lang)
+      break
+    case '3_21':
+      const similarQuestion = await tgToDB.findSimilarQuestion('en', 'What is the process to get a Thai visa?')
+      console.log('Найдено:', similarQuestion)
+      break
+    case '3_22':
+      await tgToDB.addQuestionAnswer('en', 'How to apply for a Thai visa?', 'You can apply for a Thai visa online or at the nearest Thai embassy.')
+      break
+    case '3_23':
       break
     case '5_1':
     case '5_2':

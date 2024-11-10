@@ -8,8 +8,7 @@ module.exports.saveLanguage = async function (msg, menuItem, selectedByUser) {
     if (menuItem === '0_9') txtLanguage = 'ru'
 
     let selectedByUser_ = { ...selectedByUser, language: txtLanguage, id: msg.chat.id, name: msg.chat.username + '---' + msg.chat.first_name + ' ' + msg.chat.last_name }
-    const signUpResult = await saveLanguage_(txtLanguage, msg.chat.id, msg.chat)
-    console.log('The signUpResult:', signUpResult)
+    await saveLanguage_(txtLanguage, msg.chat.id, msg.chat)
     return selectedByUser_
   } catch (err) {
     console.log(err)
