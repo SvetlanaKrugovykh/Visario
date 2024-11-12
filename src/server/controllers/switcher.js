@@ -81,13 +81,19 @@ async function handler(bot, msg, webAppUrl) {
       await menu.ChooseTime(bot, msg, lang)
       break
     case '3_21':
-      const similarQuestion = await tgToDB.findSimilarQuestion('en', 'What is the process to get a Thai visa?')  //TODO: add variable for QA
-      console.log('Найдено:', similarQuestion)
+      const similarQuestion = await tgToDB.findSimilarQuestion('en', selectedByUser[chatId]?.ticketTitle)
+      console.log('Found:', similarQuestion)
+      if (similarQuestion) {
+        await bot.sendMessage(msg.chat.id, `😉${similarQuestion.answer}`)
+      } else {
+        await bot.sendMessage(msg.chat.id, '😔The answer to your question is not found. Please, contact our support team for more information.')
+      }
       break
     case '3_22':
-      await tgToDB.addQuestionAnswer('en', 'How to apply for a Thai visa?', 'You can apply for a Thai visa online or at the nearest Thai embassy.')
+      await tgToDB.addQuestionAnswer('en', bot, chatId, selectedByUser[chatId]?.ticketTitle, selectedByUser[chatId]?.ticketBody)
       break
     case '3_23':
+      bot.sendMessage(msg.chat.id, '🍮 under construction')
       break
     case '5_1':
     case '5_2':

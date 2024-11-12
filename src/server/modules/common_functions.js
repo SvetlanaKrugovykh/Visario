@@ -1,6 +1,5 @@
-
 const { saveLanguage_ } = require("../modules/tlg_to_DB")
-
+const { inputLineScene } = require("../controllers/inputLine")
 
 module.exports.saveLanguage = async function (msg, menuItem, selectedByUser) {
   try {
@@ -16,15 +15,15 @@ module.exports.saveLanguage = async function (msg, menuItem, selectedByUser) {
   }
 }
 
-
 module.exports.textInput = async function (bot, msg, menuItem, selectedByUser) {
   try {
-    let inputLenghth = 7
-    if (msg?.text.includes('оментар')) inputLenghth = 2
+    let inputLength = 15
     const txtCommand = await inputLineScene(bot, msg)
 
-    if (!txtCommand || txtCommand.length < inputLenghth) {
-      await bot.sendMessage(msg.chat.id, 'Незрозуміле введення. Операцію скасовано\n', { parse_mode: 'HTML' })
+    if (!txtCommand || txtCommand.length < inputLength) {
+      await bot.sendMessage(msg.chat.id, 'that`s not enough\n', { parse_mode: 'HTML' })
+      const { sendClientAdminStarterButtons } = require('../controllers/clientsAdmin')
+      await sendClientAdminStarterButtons(bot, msg, 'en')
       return selectedByUser
     }
     if (menuItem === '5_1') {
@@ -32,9 +31,13 @@ module.exports.textInput = async function (bot, msg, menuItem, selectedByUser) {
     } else if (menuItem === '5_2') {
       selectedByUser = { ...selectedByUser, ticketBody: txtCommand }
     }
+    const { sendClientAdminStarterButtons } = require('../controllers/clientsAdmin')
+    await sendClientAdminStarterButtons(bot, msg, 'en')
     return selectedByUser
   } catch (err) {
     console.log(err)
+    const { sendClientAdminStarterButtons } = require('../controllers/clientsAdmin')
+    await sendClientAdminStarterButtons(bot, msg, 'en')
     return selectedByUser
   }
 }

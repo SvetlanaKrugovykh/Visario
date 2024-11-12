@@ -58,11 +58,12 @@ module.exports.saveTg_user = async function (id, username, first_name, last_name
 }
 
 
-module.exports.addQuestionAnswer = async function (language, question, answer) {
+module.exports.addQuestionAnswer = async function (language, bot, chatId, question, answer) {
   try {
     const query = `INSERT INTO ${language} (question, answer) VALUES ($1, $2)`
     await client.query(query, [question, answer])
     console.log(`The pair "question-answer" is added for the language ${language}`)
+    bot.sendMessage(chatId, `The question and answer are added to DB for the language ${language} successfully. The question is: ${question}, the answer is: ${answer}`)
   } catch (error) {
     console.error('Error when adding a question and answer:', error)
   }
@@ -78,7 +79,7 @@ module.exports.getQuestionAnswer = async function (language, question) {
   }
 }
 
-module.exports.deleteQuestionAnswer = async function (language, question) {
+module.exports.deleteQuestionAnswer = async function (language, bot, chatId, question) {
   try {
     const query = `DELETE FROM ${language} WHERE question = $1`
     await client.query(query, [question])
@@ -91,16 +92,17 @@ module.exports.deleteQuestionAnswer = async function (language, question) {
 
 module.exports.findSimilarQuestion = async function (language, queryText) {
   try {
+    const similarityThreshold = 0.3
     const query = `
-            SELECT question, answer
-            FROM ${language}
-            ORDER BY similarity(question, $1) DESC
-            LIMIT 1
-        `
-    const res = await client.query(query, [queryText])
+      SELECT question, answer
+      FROM ${language}
+      WHERE similarity(question, $1) > $2
+      ORDER BY similarity(question, $1) DESC
+      LIMIT 1
+    `
+    const res = await client.query(query, [queryText, similarityThreshold])
     return res.rows.length > 0 ? res.rows[0] : null
   } catch (error) {
-    console.error('Error when searching for a similar question:', error)
+    console.error('Error when searching for a similar question:', error);
   }
 }
-
