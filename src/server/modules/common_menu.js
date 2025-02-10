@@ -18,7 +18,8 @@ module.exports.commonStartMenu = async function (bot, msg, home = false) {
   if (adminUser) {
     await clientAdminMenuStarter(bot, msg, buttonsConfig["clientAdminStarterButtons"])
   } else {
-    await module.exports.userMenu(bot, msg, lang, home)
+    await clientAdminMenuStarter(bot, msg, buttonsConfig["clientAdminStarterButtons"])
+    // await module.exports.userMenu(bot, msg, lang, home)
   }
 }
 
